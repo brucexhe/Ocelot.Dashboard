@@ -21,5 +21,24 @@ namespace Ocelot.Dashboard.Service
 
             return Task.FromResult(result);
         }
+
+        public Task<Result> SetOcelotConfigAsync(OcelotConfig config)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(config);
+                using (var sw = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "ocelot.json"))
+                {
+                    sw.Write(json);
+                }
+
+                return Task.FromResult(Result.Sucess());
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(Result.Fail(ex.Message));
+            }
+
+        }
     }
 }

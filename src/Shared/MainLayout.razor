@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
+@inject NavigationManager NavigationManager
 <div class="sidebar">
     <NavMenu />
 </div>
@@ -13,3 +14,9 @@
         @Body
     </div>
 </div>
+@code
+{
+    protected override async Task OnInitializedAsync()
+    { 
+    }
+}
