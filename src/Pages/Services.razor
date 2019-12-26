@@ -1,0 +1,32 @@
+﻿@page "/services"
+
+@using Ocelot.Dashboard.Model
+@using Ocelot.Dashboard.Service
+@inject ConsulService ConsulService
+<h3>Services</h3>
+
+<table>
+    <tr>
+        <th>Service</th>
+        <th>Address</th>
+        <th>Tags</th>
+    </tr>
+    @foreach (var item in ServiceInfos)
+    {
+        <tr>
+            <td>@item.Service</td>
+            <td>@(item.Address + ":" + item.Port)</td>
+            <td>@(string.Join(',', item.Tags))</td>
+        </tr>
+    }
+</table>
+
+
+@code {
+    private List<ServiceInfo> ServiceInfos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ServiceInfos = await ConsulService.GetServiceInfoAsync();
+    }
+}

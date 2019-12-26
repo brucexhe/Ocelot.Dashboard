@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Ocelot.Dashboard.Data;
 using Ocelot.Authentication.Middleware;
 using Ocelot.Authorisation.Middleware;
 using Ocelot.Cache.Middleware;
@@ -27,6 +26,7 @@ using Ocelot.RequestId.Middleware;
 using Ocelot.Responder.Middleware; 
 using Ocelot.Provider.Consul;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Ocelot.Dashboard.Service;
 
 namespace Ocelot.Dashboard
 {
@@ -46,6 +46,7 @@ namespace Ocelot.Dashboard
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<ConsulService>();
 
             services.AddOcelot().AddConsul();
         }

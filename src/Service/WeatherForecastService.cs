@@ -1,8 +1,9 @@
+using Ocelot.Dashboard.Model;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ocelot.Dashboard.Data
+namespace Ocelot.Dashboard.Service
 {
     public class WeatherForecastService
     {

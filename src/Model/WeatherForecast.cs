@@ -1,6 +1,6 @@
 using System;
 
-namespace Ocelot.Dashboard.Data
+namespace Ocelot.Dashboard.Model
 {
     public class WeatherForecast
     {

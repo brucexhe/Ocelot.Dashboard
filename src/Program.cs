@@ -27,7 +27,7 @@ namespace Ocelot.Dashboard
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseConfiguration(config).UseUrls(config["urls"]).UseStartup<Startup>();
+                    webBuilder.UseConfiguration(config).UseStartup<Startup>();
                 });
 
         }
