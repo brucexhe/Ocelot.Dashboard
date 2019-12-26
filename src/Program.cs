@@ -18,11 +18,18 @@ namespace Ocelot.Dashboard
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+                            .AddJsonFile("ocelot.json", optional: true, reloadOnChange: true)
+                            .Build();
+
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseConfiguration(config).UseUrls(config["urls"]).UseStartup<Startup>();
                 });
+
+        }
     }
 }
