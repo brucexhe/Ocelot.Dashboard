@@ -3,3 +3,5 @@
 ################################################################################
 
 /src/.vs/Ocelot.Dashboard
+/src/bin/Debug/netcoreapp3.1
+/src/obj
