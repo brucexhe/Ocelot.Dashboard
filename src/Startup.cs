@@ -47,6 +47,7 @@ namespace Ocelot.Dashboard
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ConsulService>();
+            services.AddSingleton<OcelotService>();
 
             services.AddOcelot().AddConsul();
         }

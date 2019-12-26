@@ -1,0 +1,62 @@
+﻿@page "/proxies"
+
+
+@using Ocelot.Dashboard.Model
+@using Ocelot.Dashboard.Service
+@inject OcelotService OcelotService
+<h3>Proxies</h3>
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <th colspan="2">Consul Configuration</th>
+    </tr>
+    <tr>
+        <td>Host</td>
+        <td><input type="text" name="Host" @bind="OcelotConfig.GlobalConfiguration.ServiceDiscoveryProvider.Host" /></td>
+    </tr>
+
+    <tr>
+        <td>Port</td>
+        <td><input type="text" name="Port" @bind="OcelotConfig.GlobalConfiguration.ServiceDiscoveryProvider.Port" /></td>
+    </tr>
+    <tr>
+        <td>Type</td>
+        <td><input type="text" name="Type" @bind="OcelotConfig.GlobalConfiguration.ServiceDiscoveryProvider.Type" /></td>
+    </tr>
+</table>
+
+
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <th colspan="6">Routes</th>
+    </tr>
+    <tr>
+        <th>ServiceName</th>
+        <th>DownstreamScheme</th>
+        <th>UpstreamPathTemplate</th>
+        <th>DownstreamPathTemplate</th>
+        <th>UpstreamHttpMethod</th>
+        <th>LoadBalancerOptions</th>
+    </tr>
+    @foreach (ReRoute item in OcelotConfig.ReRoutes)
+    {
+        <tr>
+            <td>@item.ServiceName</td>
+            <td>@item.DownstreamScheme</td>
+            <td>@item.UpstreamPathTemplate</td>
+            <td>@item.DownstreamPathTemplate</td>
+            <td>@(string.Join(',',item.UpstreamHttpMethod))</td>
+            <td>@item.LoadBalancerOptions.Type</td>
+        </tr>
+    }
+
+</table>
+
+@code {
+    private OcelotConfig OcelotConfig;
+
+    protected override async Task OnInitializedAsync()
+    {
+        OcelotConfig = await OcelotService.GetOcelotConfigAsync();
+    }
+}
