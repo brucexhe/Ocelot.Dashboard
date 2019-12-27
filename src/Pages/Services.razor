@@ -4,29 +4,42 @@
 @using Ocelot.Dashboard.Service
 @inject ConsulService ConsulService
 <h3>Services</h3>
+@if (ServiceInfos == null)
+{
+    <div style="text-align:center;">Loading...</div>
+}
+else
+{
+    <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Address</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ServiceInfos)
+            {
+                <tr>
+                    <td>@item.Service</td>
+                    <td>@(item.Address + ":" + item.Port)</td>
+                    <td>@(string.Join(',', item.Tags))</td>
+                </tr>
+            }
 
-<table class="table table-bordered table-hover table-condensed">
-    <tr>
-        <th>Service</th>
-        <th>Address</th>
-        <th>Tags</th>
-    </tr>
-    @foreach (var item in ServiceInfos)
-    {
-        <tr>
-            <td>@item.Service</td>
-            <td>@(item.Address + ":" + item.Port)</td>
-            <td>@(string.Join(',', item.Tags))</td>
-        </tr>
-    }
-</table>
+        </tbody>
+    </table>
 
+}
 
 @code {
     private List<ServiceInfo> ServiceInfos;
 
     protected override async Task OnInitializedAsync()
     {
+        //await Task.Delay(1);
         ServiceInfos = await ConsulService.GetServiceInfoAsync();
     }
+     
 }

@@ -3,6 +3,7 @@
 @using Ocelot.Dashboard.Model
 @using Ocelot.Dashboard.Service
 @inject WeatherForecastService ForecastService
+@inject IJSRuntime  JS
 
 <h1>Weather forecast</h1>
 
@@ -42,6 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(2000);
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
     }
 }

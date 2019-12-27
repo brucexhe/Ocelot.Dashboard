@@ -48,7 +48,7 @@ namespace Ocelot.Dashboard
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ConsulService>();
             services.AddSingleton<OcelotService>();
-
+            //services.AddJSRuntime();
             services.AddOcelot().AddConsul();
         }
 
